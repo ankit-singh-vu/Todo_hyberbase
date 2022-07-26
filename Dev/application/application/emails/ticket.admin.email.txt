@@ -1,0 +1,14 @@
+Hi Admin, 
+
+A new ticket has been raised, the details are mention below.
+
+User Name: ${NAME}
+
+Email: ${EMAIL}
+
+Subject: ${SUBJECT}
+
+Details: ${DETAILS}
+
+Thank you
+Team AdvisorLearn

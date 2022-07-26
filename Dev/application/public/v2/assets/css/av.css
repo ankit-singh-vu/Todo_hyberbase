@@ -1,0 +1,107 @@
+.header nav.navbar {
+    background-color:#555;
+    color:#fff
+}
+
+.main-nav li a {
+    color: #fff;
+}
+
+.header-top {
+    color: #000;
+}
+.subscribe-item .section-title h2, .footer-title {
+    color: #BBA967;
+}
+
+.subscribe-item .newsletter-form .cmn-btn {
+    background: #BBA967;
+}
+
+.right-top li a {
+    color: #000;
+}
+
+.right-top li a:hover {
+    color: #555;
+}
+body {
+    background-color: #eee;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 19px #ccc;
+    padding: 15px !important;
+}
+
+main h3.page-title {
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    font-weight: 800;
+    color: #555;
+    padding-bottom: 10px;
+}
+
+.welcome-box {
+    width:430px;
+    min-height: 300px;
+}
+
+.welcome-box .ws-action {
+    width: auto;
+    background-color: #ccc;
+    margin-bottom: 20px;
+    min-height: 123px;
+    padding:10px;
+}
+
+.welcome-box .ws-action h2 {
+    font-size:21px;
+}
+
+
+.welcome-video {
+    width: 720px;
+    float:right;
+    min-height: 200px;
+    background-color: #ccc;
+}
+
+.welcome-video  video {
+    width:100%
+}
+
+.btn-primary {
+    background-color: #BBA967;
+    border:0;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary.active, .btn-primary:active, .open > .dropdown-toggle.btn-primary
+{
+    background-color: #0b2e13;
+    border:0;
+}
+
+.course-intro-video {
+    float:left;
+    width:400px;
+    height: 400px;
+}
+
+.course-intro-text {
+    width: 735px;
+    min-height: 400px;
+    float:left;
+    margin-right: 20px;
+    border-right: 2px dotted #ccc;
+    padding-right:20px;
+}
+
+.course-intro-video ul li {
+    list-style: none;
+    margin-bottom: 20px;
+}

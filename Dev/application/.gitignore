@@ -1,0 +1,14 @@
+resources/db.version.yml
+/vendor
+composer.phar
+composer.lock
+apigen.phar
+codecept.phar
+.vagrant
+.idea
+.DS_Store
+public/www
+catalog/*/*/build
+html/
+resources/db.version
+tests/_output/*

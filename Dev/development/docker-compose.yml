@@ -1,0 +1,118 @@
+version: '2'
+services:
+
+  gateway:
+    image: nginx:1.17.6
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+      - 3305:3305/tcp
+      - 3309:3309/tcp
+    volumes:
+      - /mnt/components/development/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /mnt/components/development/nginx/log:/var/log/nginx
+      - /mnt/components/development/certs:/opt/certs
+    stdin_open: true
+    depends_on:
+      - rest-api
+      - application
+      - socket-server
+      - phpmyadmin
+      - agent-api
+    tty: true
+    restart: always
+
+  rest-api:
+    image: registry.gitlab.com/triophase/redshift/controller-rest-api:1.0.1527
+    environment:
+      BRAND_NAME: ${APPLICATION_NAME}
+      MYSQL_DATABASE: application
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      STACK_VERSION: ${APPLICATION_VERSION}
+    restart: always
+    stdin_open: true
+    tty: true
+    links:
+      - application:application
+      - pxc:pxc
+    depends_on:
+      - pxc
+      - application
+
+  agent-api:
+    image: registry.gitlab.com/triophase/redshift/controller-agent-api:1.0.1527
+    environment:
+      BRAND_NAME: ${APPLICATION_NAME}
+      MYSQL_DATABASE: application
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      STACK_VERSION: ${APPLICATION_VERSION}
+    restart: always
+    stdin_open: true
+    tty: true
+    links:
+      - application:application
+      - pxc:pxc
+    depends_on:
+      - pxc
+      - application
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.2
+    links:
+      - pxc:db
+    environment:
+      PMA_HOST: pxc
+    restart: always
+
+  application:
+    image: registry.gitlab.com/triophase/redshift/controller-application:0.2.8716
+    environment:
+      SMTP_HOST: ${DEFAULT_SMTP_HOST}                 # email-smtp.us-east-1.amazonaws.com
+      SMTP_PASSWORD: ${DEFAULT_SMTP_PASSWORD}         # AhIRhwclL22717V1sM53QoWPSWmCszRcqK9xbclOCFhw
+      SMTP_PORT: '587'
+      SMTP_SECURE: tls
+      SMTP_USERNAME: ${DEFAULT_SMTP_USERNAME}         # AKIAJFNYLNUJRG33PHHA
+      SMTP_EMAIL_FROM: ${DEFAULT_SMTP_EMAIL_FROM}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      HTTP_PROTOCOL: https
+      MYSQL_DATABASE: application
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      REGISTRATION_SALT: ${REGISTRATION_SALT}                 # 061b77f2-212b-449d-bfe1-858d334dd0ce-7f3558e9-5187-4a8e-9926-898ed22102ca
+      APPLICATION_NAME: ${APPLICATION_NAME}
+      APPLICATION_VERSION: ${APPLICATION_VERSION}
+      APPLICATION_DOMAIN: ${APPLICATION_DOMAIN}
+      APPLICATION_SUPPORT_EMAIL: ${APPLICATION_SUPPORT_EMAIL}
+      APPLICATION_TIME_ZONE: ${APPLICATION_TIME_ZONE}
+      DEBUG_MODE: ${DEBUG_MODE}
+      DEVELOPMENT_MODE: ${DEVELOPMENT_MODE}
+      APPLICATION_NOTIFICATION_LIST: ${APPLICATION_NOTIFICATION_LIST}
+      APPLICATION_SHORT_NAME: ${APPLICATION_SHORT_NAME}
+
+    volumes:
+      - /mnt/components/application:/var/www/html
+      - /mnt/data:/opt/attachments
+      - /mnt/profile_picture:/opt/profile_picture
+      - /mnt/ticket_image:/opt/ticket_image
+      - /mnt/past_calls:/opt/past_calls
+      - /mnt/components/development/php/php.ini:/usr/local/etc/php/php.ini
+    links:
+      - pxc:pxc
+      - socket-server:socket-server
+    depends_on:
+      - pxc
+    restart: always
+
+  socket-server:
+    image: registry.gitlab.com/triophase/redshift/controller-socket-server:1.0.1529
+    stdin_open: true
+    tty: true
+    restart: always
+
+  pxc:
+    image: mariadb:10.4.10-bionic
+    environment:
+      MYSQL_DATABASE: application
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    restart: always
+    volumes:
+      - /opt/components/development/mysql:/var/lib/mysql

@@ -1,0 +1,17 @@
+{
+  "require": {
+    "curl/curl":                            "*",
+    "intervention/image":                   "*",
+    "paragonie/random_compat":              "*",
+    "nette/mail":                           "v3.1.7",
+    "ext-openssl":                          "*",
+    "ext-json":                             "*",
+    "hybridauth/hybridauth":                "~3.0",
+    "aws/aws-sdk-php": "3.190.1",
+    "sendgrid/sendgrid": "~7",
+    "stripe/stripe-php": "^7.95.0",
+    "docusign/esign-client": "4.12.0",
+    "dompdf/dompdf" : "*",
+    "quickbooks/v3-php-sdk": "^6.0"
+  }
+}

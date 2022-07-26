@@ -1,0 +1,12 @@
+Hi ${user_first_name},
+
+Thanks for registering with AdvisorLearn.com. We are really excited to have you on board.
+To complete your registration process, please open the following link in your web browser to confirm your email address.
+
+${user_email_confirm_link}
+
+Please note that this email validation request will be valid for 24 hours from the time of receiving this notification.
+
+
+Thank you
+Team wpstackHQ

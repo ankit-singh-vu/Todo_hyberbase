@@ -1,0 +1,8 @@
+Hi ${NAME},
+
+You have been invited to join the Advisor Learn.
+To accept the invitation, please click the link and set up your password. 
+
+Thank you
+Deepak Patel
+AdvisorLearn.com

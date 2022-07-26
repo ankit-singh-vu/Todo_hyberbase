@@ -1,0 +1,8 @@
+Hi ${NAME}, 
+
+Your subscription ${PACKAGE_NAME} is suspended. To know more please login to your dashboard.
+
+Dashboard Link:- ${DASHBOARD_URL} 
+
+Thank you 
+Team AdvisorLearn

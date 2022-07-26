@@ -1,0 +1,6 @@
+Hi ${NAME},
+
+Your ticket has been raised successfully. We will be happy to help you. Admin will contact you shortly.
+
+Thank you 
+Team AdvisorLearn

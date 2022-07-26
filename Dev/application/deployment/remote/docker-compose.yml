@@ -1,0 +1,73 @@
+# LoadBalancer
+#load-balancer:
+#  ports:
+#    - ${LOADBALANCER_IP}:80:80
+#    - ${LOADBALANCER_IP}:443:443/tcp
+#    - ${LOADBALANCER_IP}:6464:6464/tcp
+#  tty: true
+#  links:
+#    - phpmyadmin:phpmyadmin
+#    - application-server:application-server
+#  image: nginx
+#  volumes:
+#    - /etc/letsencrypt/archive:/opt
+#    - /mnt/wpforever/nginx/conf:/etc/nginx/conf.d
+#  stdin_open: true
+
+# WP-Forever Cloud Application
+application-server:
+  image: hub.docker.wpstack.io:5000/wpstack/application:{{APP_VERSION}}
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    WPFOREVER_APP_VERSION: {{APP_VERSION}}
+  links:
+     - mysql-server:mysql
+  volumes:
+    - /mnt/wpforever/resources:/var/www/resources
+    - /mnt/wpforever/opt:/opt
+    - /mnt/wpforever/session:/var/lib/php5/sessions
+
+# MySQL DB
+mysql-server:
+  image: mariadb
+  volumes:
+    - /mnt/wpforever/mysql:/var/lib/mysql
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    MYSQL_DATABASE: wpforever_application
+  cpu_shares: 256   #25% or (1024/100)*25 = 256
+  cpu_quota: 50000  #50% or (100000/100)*50 = 50000
+  #cpuset: 0,1
+  mem_limit: 512000000
+  memswap_limit: 128000000
+  shm_size: 256000000
+
+# PhpMyAdmin
+phpmyadmin:
+  image: dyutiman/phpmyadmin:5.0
+  environment:
+   - UPLOAD_SIZE=1G
+  restart: always
+  links:
+   - mysql-server:mysql
+  cpu_shares: 256   #25% or (1024/100)*25 = 256
+  cpu_quota: 50000  #50% or (100000/100)*50 = 50000
+  #cpuset: 0,1
+  mem_limit: 512000000
+  memswap_limit: 128000000
+  shm_size: 256000000
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+Hi ${NAME}, 
+
+Congratulations! You have been subscribed to ${PACKAGE_NAME}.
+To know more about the subscription please login to your dashboard.
+
+Dashboard Link:- ${DASHBOARD_URL} 
+
+Thank you 
+Team AdvisorLearn

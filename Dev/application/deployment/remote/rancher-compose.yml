@@ -1,0 +1,11 @@
+# LoadBalancer
+load-balancer:
+  scale: 1
+
+# Orion Application
+application-server:
+  scale: 1
+
+# MySQL DB
+mysql-server:
+  scale: 1

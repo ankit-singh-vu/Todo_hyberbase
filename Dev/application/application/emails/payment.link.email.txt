@@ -1,0 +1,8 @@
+Hi ${NAME},
+
+Thanks for deciding to join our program. As discussed below is your payment link for Invoice #${INVOICE_ID} dated ${INVOICE_DATE} for the amount of ${INVOICE_AMOUNT}
+To make the payment, please click the link and enter your payment details.
+
+Thank you
+Customer Success Team
+AdvisorLearn.com
